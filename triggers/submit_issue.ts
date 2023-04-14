@@ -1,16 +1,17 @@
-import { Trigger } from "deno-slack-sdk/types.ts";
-import SampleWorkflow from "../workflows/sample_workflow.ts";
+import { Trigger } from "deno-slack-api/types.ts";
+import SubmitIssueWorkflow from "../workflows/submit_issue.ts";
+
 /**
  * Triggers determine when workflows are executed. A trigger
  * file describes a scenario in which a workflow should be run,
  * such as a user pressing a button or when a specific event occurs.
  * https://api.slack.com/future/triggers
  */
-const sampleTrigger: Trigger<typeof SampleWorkflow.definition> = {
+const submitIssue: Trigger<typeof SubmitIssueWorkflow.definition> = {
   type: "shortcut",
-  name: "Sample trigger",
-  description: "A sample trigger",
-  workflow: "#/workflows/sample_workflow",
+  name: "Submit an issue",
+  description: "Submit an issue to the channel",
+  workflow: "#/workflows/submit_issue",
   inputs: {
     interactivity: {
       value: "{{data.interactivity}}",
@@ -18,10 +19,7 @@ const sampleTrigger: Trigger<typeof SampleWorkflow.definition> = {
     channel: {
       value: "{{data.channel_id}}",
     },
-    user: {
-      value: "{{data.user_id}}",
-    },
   },
 };
 
-export default sampleTrigger;
+export default submitIssue;

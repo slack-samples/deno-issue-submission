@@ -1,6 +1,6 @@
 import { Manifest } from "deno-slack-sdk/mod.ts";
-import SampleWorkflow from "./workflows/sample_workflow.ts";
-import SampleObjectDatastore from "./datastores/sample_datastore.ts";
+import { CreateIssueMessage } from "./functions/create_issue_message.ts";
+import SubmitIssueWorkflow from "./workflows/submit_issue.ts";
 
 /**
  * The app manifest contains the app's configuration. This
@@ -8,17 +8,11 @@ import SampleObjectDatastore from "./datastores/sample_datastore.ts";
  * https://api.slack.com/future/manifest
  */
 export default Manifest({
-  name: "deno-starter-template",
-  description: "A template for building Slack apps with Deno",
+  name: "deno-issue-submission",
+  description: "A basic sample that demonstrates issue submission to channel",
   icon: "assets/default_new_app_icon.png",
-  workflows: [SampleWorkflow],
+  workflows: [SubmitIssueWorkflow],
+  functions: [CreateIssueMessage],
   outgoingDomains: [],
-  datastores: [SampleObjectDatastore],
-  botScopes: [
-    "commands",
-    "chat:write",
-    "chat:write.public",
-    "datastore:read",
-    "datastore:write",
-  ],
+  botScopes: ["commands", "chat:write", "chat:write.public"],
 });

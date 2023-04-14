@@ -1,7 +1,7 @@
-# Deno Starter Template
+# Deno Issue Submission
 
-This is a scaffolded Deno template used to build out Slack apps using the Slack
-CLI.
+This sample features a basic issue submission workflow that posts the issue
+raised to channel.
 
 **Guide Outline**:
 
@@ -10,7 +10,6 @@ CLI.
   - [Clone the Template](#clone-the-template)
 - [Create a Link Trigger](#create-a-link-trigger)
 - [Running Your Project Locally](#running-your-project-locally)
-- [Datastores](#datastores)
 - [Testing](#testing)
 - [Deploying Your App](#deploying-your-app)
   - [Viewing Activity Logs](#viewing-activity-logs)
@@ -28,17 +27,17 @@ requires any of [the Slack paid plans](https://slack.com/pricing).
 
 ### Install the Slack CLI
 
-To use this template, you first need to install and configure the Slack CLI.
+To use this sample, you first need to install and configure the Slack CLI.
 Step-by-step instructions can be found in our
 [Quickstart Guide](https://api.slack.com/future/quickstart).
 
-### Clone the Template
+### Clone the Sample
 
 Start by cloning this repository:
 
 ```zsh
 # Clone this project onto your machine
-$ slack create my-app -t slack-samples/deno-starter-template
+$ slack create my-app -t slack-samples/deno-issue-submission
 
 # Change into this project directory
 $ cd my-app
@@ -58,24 +57,20 @@ associated workflow.
 Link triggers are _unique to each installed version of your app_. This means
 that Shortcut URLs will be different across each workspace, as well as between
 [locally run](#running-your-project-locally) and
-[deployed apps](#deploying-your-app).
+[deployed apps](#deploying-your-app). When creating a trigger, you must select
+the Workspace that you'd like to create the trigger in. Each Workspace has a
+development version (denoted by `(local)`), as well as a deployed version.
 
-When creating a trigger, you must select the workspace and environment that
-you'd like to create the trigger in. Each workspace has a local development
-version (denoted by `(dev)`), as well as a deployed version. Triggers created in
-a local environment will only be available to use when running the application
-locally.
-
-To create a link trigger for the workflow in this template, run the following
+To create a link trigger for the workflow in this sample, run the following
 command:
 
 ```zsh
-$ slack trigger create --trigger-def triggers/sample_trigger.ts
+$ slack trigger create --trigger-def triggers/submit_issue.ts
 ```
 
-After selecting a workspace and environment, the output provided will include
-the link trigger Shortcut URL. Copy and paste this URL into a channel as a
-message, or add it as a bookmark in a channel of the workspace you selected.
+After selecting a Workspace, the output provided will include the link trigger
+Shortcut URL. Copy and paste this URL into a channel as a message, or add it as
+a bookmark in a channel of the Workspace you selected.
 
 **Note: this link won't run the workflow until the app is either running locally
 or deployed!** Read on to learn how to run your app locally and eventually
@@ -85,7 +80,7 @@ deploy it to Slack hosting.
 
 While building your app, you can see your changes propagated to your workspace
 in real-time with `slack run`. In both the CLI and in Slack, you'll know an app
-is the development version if the name has the string `(dev)` appended.
+is the development version if the name has the string `(local)` appended.
 
 ```zsh
 # Run app locally
@@ -96,22 +91,13 @@ Connected, awaiting events
 
 Once running, click the
 [previously created Shortcut URL](#create-a-link-trigger) associated with the
-`(dev)` version of your app. This should start the included sample workflow.
+`(local)` version of your app. This should start the included sample workflow.
 
 To stop running locally, press `<CTRL> + C` to end the process.
 
-## Datastores
-
-If your app needs to store any data, a datastore would be the right place for
-that. For an example of a datastore, see `datastores/sample_datastore.ts`. Using
-a datastore also requires the `datastore:write`/`datastore:read` scopes to be
-present in your manifest.
-
 ## Testing
 
-For an example of how to test a function, see
-`functions/sample_function_test.ts`. Test filenames should be suffixed with
-`_test`.
+Test filenames should be suffixed with `_test`.
 
 Run all tests with `deno test`:
 
@@ -129,8 +115,8 @@ $ slack deploy
 ```
 
 After deploying, [create a new link trigger](#create-a-link-trigger) for the
-production version of your app (not appended with `(dev)`). Once the trigger is
-invoked, the workflow should run just as it did in when developing locally.
+production version of your app (not appended with `(local)`). Once the trigger
+is invoked, the workflow should run just as it did in when developing locally.
 
 ### Viewing Activity Logs
 
@@ -173,12 +159,6 @@ to the next step.
 [Triggers](https://api.slack.com/future/triggers) determine when workflows are
 executed. A trigger file describes a scenario in which a workflow should be run,
 such as a user pressing a button or when a specific event occurs.
-
-### `/datastores`
-
-[Datastores](https://api.slack.com/future/datastores) can securely store and
-retrieve data for your application. Required scopes to use datastores include
-`datastore:write` and `datastore:read`.
 
 ## Resources
 
