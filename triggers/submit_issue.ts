@@ -10,7 +10,7 @@ import SubmitIssueWorkflow from "../workflows/submit_issue.ts";
 const submitIssue: Trigger<typeof SubmitIssueWorkflow.definition> = {
   type: "shortcut",
   name: "Submit an issue",
-  description: "Submit an issue to channel",
+  description: "Submit an issue to the channel",
   workflow: "#/workflows/submit_issue",
   inputs: {
     interactivity: {

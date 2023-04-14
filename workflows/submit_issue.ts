@@ -9,7 +9,7 @@ import { CreateIssueMessage } from "../functions/create_issue_message.ts";
 const SubmitIssueWorkflow = DefineWorkflow({
   callback_id: "submit_issue",
   title: "Submit an issue",
-  description: "Submit an issue to channel",
+  description: "Submit an issue to the channel",
   input_parameters: {
     properties: {
       interactivity: {
