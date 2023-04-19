@@ -98,7 +98,7 @@ const createIssueStep = SubmitIssueWorkflow.addStep(
 );
 
 /**
- * SendMessage is a Slack function. These are built-in
+ * SendMessage is a Slack function. These are
  * Slack-native actions, like creating a channel or sending
  * a message and can be used alongside custom functions in a workflow.
  * https://api.slack.com/future/functions
