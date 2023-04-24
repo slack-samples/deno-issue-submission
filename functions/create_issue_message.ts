@@ -5,7 +5,7 @@ import { SlackFunction } from "deno-slack-sdk/mod.ts";
  * Functions are reusable building blocks of automation that accept
  * inputs, perform calculations, and provide outputs. Functions can
  * be used independently or as steps in workflows.
- * https://api.slack.com/future/functions/custom
+ * https://api.slack.com/automation/functions/custom
  */
 export const CreateIssueMessage = DefineFunction({
   callback_id: "create_issue_message",
@@ -47,7 +47,7 @@ export const CreateIssueMessage = DefineFunction({
  * SlackFunction takes in two arguments: the CustomFunction
  * definition (see above), as well as a function that contains
  * handler logic that's run when the function is executed.
- * https://api.slack.com/future/functions/custom
+ * https://api.slack.com/automation/functions/custom
  */
 export default SlackFunction(
   CreateIssueMessage,

@@ -4,7 +4,7 @@ import { CreateIssueMessage } from "../functions/create_issue_message.ts";
 /**
  * A workflow is a set of steps that are executed in order.
  * Each step in a workflow is a function.
- * https://api.slack.com/future/workflows
+ * https://api.slack.com/automation/workflows
  */
 const SubmitIssueWorkflow = DefineWorkflow({
   callback_id: "submit_issue",
@@ -34,7 +34,7 @@ const SubmitIssueWorkflow = DefineWorkflow({
 /**
  * For collecting input from users, we recommend the
  * built-in OpenForm function as a first step.
- * https://api.slack.com/future/functions#open-a-form
+ * https://api.slack.com/automation/functions#open-a-form
  */
 const inputForm = SubmitIssueWorkflow.addStep(
   Schema.slack.functions.OpenForm,
@@ -85,7 +85,7 @@ const inputForm = SubmitIssueWorkflow.addStep(
  * of automation deployed to Slack infrastructure. They
  * accept inputs, perform calculations, and provide
  * outputs, just like typical programmatic functions.
- * https://api.slack.com/future/functions/custom
+ * https://api.slack.com/automation/functions/custom
  */
 const createIssueStep = SubmitIssueWorkflow.addStep(
   CreateIssueMessage,
@@ -101,7 +101,7 @@ const createIssueStep = SubmitIssueWorkflow.addStep(
  * SendMessage is a Slack function. These are
  * Slack-native actions, like creating a channel or sending
  * a message and can be used alongside custom functions in a workflow.
- * https://api.slack.com/future/functions
+ * https://api.slack.com/automation/functions
  */
 SubmitIssueWorkflow.addStep(Schema.slack.functions.SendMessage, {
   channel_id: SubmitIssueWorkflow.inputs.channel,
