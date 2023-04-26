@@ -14,8 +14,8 @@ export const CreateIssueMessage = DefineFunction({
   source_file: "functions/create_issue_message.ts",
   input_parameters: {
     properties: {
-      interactivity: {
-        type: Schema.slack.types.interactivity,
+      submitting_user: {
+        type: Schema.slack.types.user_id,
       },
       severity: {
         type: Schema.types.string,
@@ -30,7 +30,7 @@ export const CreateIssueMessage = DefineFunction({
         description: "Relevant link or URL",
       },
     },
-    required: ["interactivity", "severity", "description"],
+    required: ["submitting_user", "severity", "description"],
   },
   output_parameters: {
     properties: {
@@ -52,8 +52,7 @@ export const CreateIssueMessage = DefineFunction({
 export default SlackFunction(
   CreateIssueMessage,
   ({ inputs }) => {
-    const { severity, description, link, interactivity } = inputs;
-    const submitting_user = interactivity.interactor.id;
+    const { severity, description, link, submitting_user } = inputs;
     let message =
       `*${severity}  Issue submission from <@${submitting_user}>* \n\n*Description of the issue:*\n${description}\n\n`;
 
