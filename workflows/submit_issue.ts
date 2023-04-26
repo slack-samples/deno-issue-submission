@@ -21,14 +21,6 @@ const SubmitIssueWorkflow = DefineWorkflow({
     },
     required: ["channel"],
   },
-  output_parameters: {
-    properties: {
-      message: {
-        type: Schema.slack.types.rich_text,
-      },
-    },
-    required: ["message"],
-  },
 });
 
 /**
@@ -90,7 +82,7 @@ const inputForm = SubmitIssueWorkflow.addStep(
 const createIssueStep = SubmitIssueWorkflow.addStep(
   CreateIssueMessage,
   {
-    interactivity: inputForm.outputs.interactivity,
+    submitting_user: inputForm.outputs.interactivity.interactor.id,
     severity: inputForm.outputs.fields.severity,
     description: inputForm.outputs.fields.description,
     link: inputForm.outputs.fields.link,
