@@ -1,4 +1,5 @@
-import { Trigger } from "deno-slack-api/types.ts";
+import { Trigger } from "deno-slack-sdk/types.ts";
+import { TriggerContextData } from "deno-slack-api/mod.ts";
 import SubmitIssueWorkflow from "../workflows/submit_issue.ts";
 
 /**
@@ -14,10 +15,10 @@ const submitIssue: Trigger<typeof SubmitIssueWorkflow.definition> = {
   workflow: "#/workflows/submit_issue",
   inputs: {
     interactivity: {
-      value: "{{data.interactivity}}",
+      value: TriggerContextData.Shortcut.interactivity,
     },
     channel: {
-      value: "{{data.channel_id}}",
+      value: TriggerContextData.Shortcut.channel_id,
     },
   },
 };
