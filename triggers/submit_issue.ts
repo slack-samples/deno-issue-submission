@@ -1,5 +1,5 @@
 import { Trigger } from "deno-slack-sdk/types.ts";
-import { TriggerContextData } from "deno-slack-api/mod.ts";
+import { TriggerContextData, TriggerTypes } from "deno-slack-api/mod.ts";
 import SubmitIssueWorkflow from "../workflows/submit_issue.ts";
 
 /**
@@ -9,7 +9,7 @@ import SubmitIssueWorkflow from "../workflows/submit_issue.ts";
  * https://api.slack.com/automation/triggers
  */
 const submitIssue: Trigger<typeof SubmitIssueWorkflow.definition> = {
-  type: "shortcut",
+  type: TriggerTypes.Shortcut,
   name: "Submit an issue",
   description: "Submit an issue to the channel",
   workflow: "#/workflows/submit_issue",
