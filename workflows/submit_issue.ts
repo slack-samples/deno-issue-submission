@@ -19,7 +19,7 @@ const SubmitIssueWorkflow = DefineWorkflow({
         type: Schema.slack.types.channel_id,
       },
     },
-    required: ["channel"],
+    required: ["channel", "interactivity"],
   },
 });
 
