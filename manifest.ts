@@ -1,5 +1,5 @@
 import { Manifest } from "deno-slack-sdk/mod.ts";
-import { CreateIssueMessage } from "./functions/create_issue_message.ts";
+import { PostIssueMessage } from "./functions/post_issue_message.ts";
 import SubmitIssueWorkflow from "./workflows/submit_issue.ts";
 
 /**
@@ -12,7 +12,7 @@ export default Manifest({
   description: "A basic sample that demonstrates issue submission to channel",
   icon: "assets/default_new_app_icon.png",
   workflows: [SubmitIssueWorkflow],
-  functions: [CreateIssueMessage],
+  functions: [PostIssueMessage],
   outgoingDomains: [],
   botScopes: ["commands", "chat:write", "chat:write.public"],
 });

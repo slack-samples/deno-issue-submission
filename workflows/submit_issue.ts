@@ -1,5 +1,5 @@
 import { DefineWorkflow, Schema } from "deno-slack-sdk/mod.ts";
-import { CreateIssueMessage } from "../functions/create_issue_message.ts";
+import { PostIssueMessage } from "../functions/post_issue_message.ts";
 
 /**
  * A workflow is a set of steps that are executed in order.
@@ -42,17 +42,17 @@ const inputForm = SubmitIssueWorkflow.addStep(
         enum: [":white_circle:", ":large_blue_circle:", ":red_circle:"],
         choices: [
           {
-            value: ":white_circle:",
+            value: "low",
             title: ":white_circle:  Low",
             description: "Low severity",
           },
           {
-            value: ":large_blue_circle:",
+            value: "medium",
             title: ":large_blue_circle:  Medium",
             description: "Medium severity",
           },
           {
-            value: ":red_circle:",
+            value: "high",
             title: ":red_circle:  High",
             description: "High severity",
           },
@@ -79,25 +79,15 @@ const inputForm = SubmitIssueWorkflow.addStep(
  * outputs, just like typical programmatic functions.
  * https://api.slack.com/automation/functions/custom
  */
-const createIssueStep = SubmitIssueWorkflow.addStep(
-  CreateIssueMessage,
+SubmitIssueWorkflow.addStep(
+  PostIssueMessage,
   {
+    channel: SubmitIssueWorkflow.inputs.channel,
     submitting_user: inputForm.outputs.interactivity.interactor.id,
     severity: inputForm.outputs.fields.severity,
     description: inputForm.outputs.fields.description,
     link: inputForm.outputs.fields.link,
   },
 );
-
-/**
- * SendMessage is a Slack function. These are
- * Slack-native actions, like creating a channel or sending
- * a message and can be used alongside custom functions in a workflow.
- * https://api.slack.com/automation/functions
- */
-SubmitIssueWorkflow.addStep(Schema.slack.functions.SendMessage, {
-  channel_id: SubmitIssueWorkflow.inputs.channel,
-  message: createIssueStep.outputs.message,
-});
 
 export default SubmitIssueWorkflow;
