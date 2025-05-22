@@ -18,7 +18,7 @@ Deno.test("Posts a message", async () => {
       assertEquals(body.get("channel"), "C111");
 
       return Promise.resolve(
-        new Response(JSON.stringify({ ok: true, ts: "1111.2222" }), {
+        new Response(JSON.stringify({ ok: true }), {
           status: 200,
         }),
       );
@@ -32,8 +32,7 @@ Deno.test("Posts a message", async () => {
     description: "there ware an issue",
     link: "https://example.ca",
   };
-  const token = "empty-response";
-  const { outputs } = await handler(createContext({ inputs, token }));
+  const { outputs } = await handler(createContext({ inputs }));
   assertEquals(outputs, {
     channel: "C111",
     description: "there ware an issue",
