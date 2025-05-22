@@ -5,7 +5,7 @@ import { assertEquals } from "@std/assert/equals";
 
 const { createContext } = SlackFunctionTester("my-function");
 
-Deno.test("No message found", async () => {
+Deno.test("Posts a message", async () => {
   using _fetchStub = stub(
     globalThis,
     "fetch",
