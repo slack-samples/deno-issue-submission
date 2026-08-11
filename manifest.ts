@@ -1,4 +1,4 @@
-import { Manifest } from "deno-slack-sdk/mod.ts";
+import { Manifest } from "@slack/sdk";
 import { PostIssueMessage } from "./functions/post_issue_message.ts";
 import SubmitIssueWorkflow from "./workflows/submit_issue.ts";
 
