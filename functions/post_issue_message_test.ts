@@ -1,4 +1,4 @@
-import { SlackFunctionTester } from "deno-slack-sdk/mod.ts";
+import { SlackFunctionTester } from "@slack/sdk";
 import handler from "./post_issue_message.ts";
 import { stub } from "@std/testing/mock";
 import { assertEquals } from "@std/assert/equals";
